@@ -28,13 +28,17 @@ export default function OrderExportButton({ data }: { data: any }) {
       fileName={`Radni-Nalog-${data.order.number}.pdf`}
       className="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-[10px] uppercase tracking-widest transition-all rounded shadow-sm border border-slate-200"
     >
-      {({ loading }) => (
+      {({ loading }) =>
         loading ? (
-          <><Loader2 className="animate-spin" size={14} /> Generišem...</>
+          <>
+            <Loader2 className="animate-spin" size={14} /> Generišem...
+          </>
         ) : (
-          <><FileDown size={14} /> Export PDF</>
+          <>
+            <FileDown size={14} /> Export PDF
+          </>
         )
-      )}
+      }
     </PDFDownloadLink>
   );
 }

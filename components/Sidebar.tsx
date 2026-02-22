@@ -5,9 +5,17 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
-import { 
-  LayoutDashboard, Users, Car, FileText, 
-  Settings, LogOut, Wrench, Menu, X, ChartNoAxesCombined 
+import {
+  LayoutDashboard,
+  Users,
+  Car,
+  FileText,
+  Settings,
+  LogOut,
+  Wrench,
+  Menu,
+  X,
+  ChartNoAxesCombined,
 } from "lucide-react";
 
 const menuItems = [
@@ -28,7 +36,7 @@ export default function Sidebar() {
   return (
     <>
       {/* Dugme za mobilni (prikazuje se samo na < 1024px) */}
-      <button 
+      <button
         onClick={toggleSidebar}
         className="lg:hidden print:hidden fixed top-4 left-4 z-50 p-2 bg-slate-900 text-white rounded-lg shadow-lg"
       >
@@ -37,20 +45,22 @@ export default function Sidebar() {
 
       {/* Overlay za mobilni (zatvara meni klikom van njega) */}
       {isOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 z-40 lg:hidden backdrop-blur-sm"
           onClick={toggleSidebar}
         />
       )}
 
       {/* Glavni Sidebar */}
-      <aside className={`
+      <aside
+        className={`
         fixed lg:sticky top-0 left-0 z-40
         h-screen w-72 bg-slate-950 text-slate-400
         transform transition-transform duration-300 ease-in-out
         border-r border-slate-800 flex flex-col print:hidden
         ${isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
-      `}>
+      `}
+      >
         {/* Logo deo */}
         <div className="p-6 mb-2">
           <div className="flex items-center gap-3">
@@ -74,12 +84,21 @@ export default function Sidebar() {
                 onClick={() => setIsOpen(false)} // Zatvori na mobilnom kad se klikne
                 className={`
                   flex items-center gap-3 px-4 py-2.5 rounded-lg font-medium transition-all group
-                  ${isActive 
-                    ? "bg-blue-600 text-white" 
-                    : "hover:bg-slate-900 hover:text-slate-200"}
+                  ${
+                    isActive
+                      ? "bg-blue-600 text-white"
+                      : "hover:bg-slate-900 hover:text-slate-200"
+                  }
                 `}
               >
-                <item.icon size={18} className={isActive ? "text-white" : "text-slate-500 group-hover:text-blue-400"} />
+                <item.icon
+                  size={18}
+                  className={
+                    isActive
+                      ? "text-white"
+                      : "text-slate-500 group-hover:text-blue-400"
+                  }
+                />
                 <span className="text-[14px]">{item.label}</span>
               </Link>
             );

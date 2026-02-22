@@ -1,4 +1,4 @@
-"use server"
+"use server";
 import { db } from "@/db";
 import { users, shops } from "@/db/schema";
 import { eq } from "drizzle-orm";
@@ -10,21 +10,27 @@ export async function registerUser(formData: FormData) {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
   const shopName = formData.get("shopName") as string;
-  const address = formData.get("address") as string; 
-  const city = formData.get("city") as string;      
+  const address = formData.get("address") as string;
+  const city = formData.get("city") as string;
 
   try {
-    const existing = await db.select().from(users).where(eq(users.email, email));
+    const existing = await db
+      .select()
+      .from(users)
+      .where(eq(users.email, email));
     if (existing.length > 0) return { error: "Email je već u upotrebi." };
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const myToken = randomUUID();
 
-    const [newShop] = await db.insert(shops).values({
-      name: shopName,
-      address: address,
-      city: city,
-    }).returning();
+    const [newShop] = await db
+      .insert(shops)
+      .values({
+        name: shopName,
+        address: address,
+        city: city,
+      })
+      .returning();
 
     await db.insert(users).values({
       email,
@@ -35,9 +41,9 @@ export async function registerUser(formData: FormData) {
 
     const verifyUrl = `${process.env.NEXTAUTH_URL}/verify?token=${myToken}`;
     await resend.emails.send({
-      from: 'N&N Auto <onboarding@resend.dev>',
+      from: "N&N Auto <onboarding@resend.dev>",
       to: email,
-      subject: 'Potvrdi svoj nalog - N&N Auto',
+      subject: "Potvrdi svoj nalog - N&N Auto",
       html: `
     <!DOCTYPE html>
     <html>
@@ -85,7 +91,7 @@ export async function registerUser(formData: FormData) {
         </div>
       </body>
     </html>
-  `
+  `,
     });
 
     return { success: "Molimo Vas dovršite potvrdu naloga na vašem emailu." };

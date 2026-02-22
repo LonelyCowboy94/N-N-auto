@@ -1,36 +1,162 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚗 N&N Auto
 
-## Getting Started
+### ⚙️ Professional Auto Shop Management SaaS
 
-First, run the development server:
+A modern, high-performance web application designed to **digitize automechanic workflows**, manage service history, and track business finances in real time.
+
+---
+
+## 🌐 Live Concept
+
+> Built as a scalable **multi-tenant SaaS platform** for auto repair shops.
+
+---
+
+## 🖼️ Preview
+
+### Dashboard
+![Dashboard Preview](https://via.placeholder.com/1200x600?text=N%26N+Auto+Dashboard)
+
+### Work Order (A4 Print)
+![Work Order Preview](https://via.placeholder.com/1200x600?text=Work+Order+A4+View)
+
+---
+
+## 🧰 Tech Stack
+
+| Category | Technology |
+|----------|------------|
+| Framework | Next.js 16 (App Router) |
+| Database | PostgreSQL (Neon) |
+| ORM | Drizzle ORM |
+| Auth | NextAuth.js |
+| Styling | Tailwind CSS v4 |
+| Storage | UploadThing |
+| Emails | Resend |
+| Icons | Lucide React |
+
+---
+
+## ✨ Core Features
+
+### 📋 Smart Work Orders
+
+- A4-optimized digital service sheets
+- Automatic VAT (20%) and totals calculation
+- Real-time kW ⇄ HP conversion
+- Printable & PDF export ready
+- Status tracking: **Open → Completed**
+
+---
+
+### 📊 Business Analytics
+
+- Monthly revenue dashboard
+- Expense tracking system
+- Profit & growth insights
+- Customer visit metrics
+
+---
+
+### 👥 CRM System
+
+- Customer & vehicle database
+- Complete service history
+- Global smart search
+- Digital service book
+
+---
+
+### 🎨 Branding & UX
+
+- Custom shop logo upload
+- Persistent Dark / Light mode
+- Professional industrial UI design
+
+---
+
+### 🔐 Security & SaaS Architecture
+
+- Multi-tenant database structure
+- Shop-level data isolation
+- Server-side session validation
+- Protected dashboard routing
+
+---
+
+## 🏗️ System Architecture
+
+
+Multi-Tenant Model:
+
+Users → Shop → Customers → Vehicles → Work Orders → Expenses
+
+
+Each entity is securely linked via **shopId**, ensuring full tenant separation.
+
+---
+
+## 📂 Project Structure
+
+
+app/
+├── actions/ # Server logic
+├── api/ # API routes
+├── dashboard/ # Protected pages
+│ ├── documents/
+│ ├── customers/
+│ ├── vehicles/
+│ └── stats/
+└── verify/ # Email verification
+
+components/
+db/
+lib/
+middleware.ts
+
+
+---
+
+## 🚀 Getting Started
+
+### 1️⃣ Clone repo
 
 ```bash
+git clone https://github.com/youruser/nn-auto.git
+cd nn-auto
+2️⃣ Install dependencies
+npm install
+3️⃣ Setup environment variables
+
+Create .env:
+
+DATABASE_URL=
+NEXTAUTH_URL=
+NEXTAUTH_SECRET=
+RESEND_API_KEY=
+UPLOADTHING_TOKEN=
+4️⃣ Sync database
+npx drizzle-kit push
+5️⃣ Run dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+📈 Future Roadmap
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Online booking system
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Invoice payment tracking
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Mobile responsive app mode
 
-## Learn More
+Mechanic performance analytics
 
-To learn more about Next.js, take a look at the following resources:
+Automated reminders (SMS/Email)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+📝 License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+MIT License
 
-## Deploy on Vercel
+❤️ About
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Built with passion to modernize traditional auto repair businesses and bring them into the digital era.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+⭐ If you like this project, consider giving it a star!
