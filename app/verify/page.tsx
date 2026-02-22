@@ -7,11 +7,11 @@ import { redirect } from "next/navigation";
 export default async function VerifyPage({ searchParams }: { searchParams: Promise<{ token?: string }> }) {
   const { token } = await searchParams;
 
-  if (!token) redirect("/login?error=InvalidToken");
+  if (!token) redirect("/?error=InvalidToken");
 
   const [user] = await db.select().from(users).where(eq(users.verificationToken, token));
 
-  if (!user) redirect("/login?error=TokenNotFound");
+  if (!user) redirect("/?error=TokenNotFound");
 
   // USPEH: Verifikujemo i brišemo token
   await db.update(users)
@@ -21,5 +21,5 @@ export default async function VerifyPage({ searchParams }: { searchParams: Promi
     })
     .where(eq(users.id, user.id));
 
-  redirect("/login?success=Verified");
+  redirect("/?success=Verified");
 }

@@ -1,4 +1,13 @@
-export { default } from "next-auth/middleware";
+import { withAuth } from "next-auth/middleware";
+
+const middleware = withAuth({
+  pages: {
+    signIn: "/", 
+  },
+});
+
+export default middleware;
+export const proxy = middleware;
 
 export const config = {
   matcher: [
@@ -6,6 +15,7 @@ export const config = {
     "/customers/:path*",
     "/vehicles/:path*",
     "/documents/:path*",
+    "/stats/:path*",
+    "/settings/:path*",
   ],
 };
-

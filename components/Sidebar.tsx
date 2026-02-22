@@ -108,7 +108,7 @@ export default function Sidebar() {
         {/* Footer / User deo */}
         <div className="p-4 border-t border-slate-800">
           <button
-            onClick={() => signOut({ callbackUrl: "/login" })}
+            onClick={() => signOut({ callbackUrl: "/" })}
             className="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-slate-500 hover:bg-red-500/10 hover:text-red-500 transition-all"
           >
             <LogOut size={18} />
