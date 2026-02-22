@@ -99,7 +99,7 @@ export default function LandingPage() {
       className="relative min-h-screen w-full bg-[#020617] flex flex-col overflow-hidden"
       style={{ backgroundImage: "url('/home-bg2.png')", backgroundSize: 'cover', backgroundPosition: 'left center', backgroundRepeat: 'no-repeat' }}
     >
-      <div className="absolute inset-0 bg-[#020617]/60 z-0" />
+      <div className="absolute inset-0 bg-[#020617]/60 shadow-[inset_0_-50px_400px_-10px_rgba(0,0,0,0.8)] z-0" />
 
       {/* HEADER */}
       <header className="relative z-20 flex items-center justify-between px-10 py-8 max-w-7xl mx-auto w-full">
@@ -107,7 +107,7 @@ export default function LandingPage() {
           <div className="bg-blue-600 p-2 shadow-[0_0_20px_#2563eb]">
             <Wrench className="text-white" size={22} />
           </div>
-          <span className="text-2xl font-black text-white italic uppercase tracking-tighter">AutoMaster</span>
+          <span className="text-2xl font-black text-white italic uppercase tracking-tighter">N&N Auto</span>
         </div>
         <nav className="hidden md:flex gap-10 text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">
            <Link href="#" className="hover:text-blue-500 transition-colors">Sistem</Link>
@@ -152,7 +152,7 @@ export default function LandingPage() {
                   </div>
                   {serverError && <p className="text-[10px] font-black text-red-500 uppercase tracking-widest bg-red-500/10 p-2 border-l-2 border-red-500">{serverError}</p>}
                   <button type="submit" disabled={loading} className="w-full bg-blue-600 text-white py-4 font-black uppercase text-xs tracking-[0.2em] hover:bg-blue-700 transition-all shadow-[0_10px_20px_rgba(37,99,235,0.3)] disabled:opacity-50">
-                    {loading ? <Loader2 className="animate-spin" size={18} /> : "Prijavi se na sistem"}
+                    {loading ? <Loader2 className="animate-spin m-auto" size={18} /> : "Prijavi se na sistem"}
                   </button>
                 </form>
 
@@ -229,7 +229,7 @@ export default function LandingPage() {
       </div>
 
       <footer className="relative z-20 p-10 text-center border-t border-white/5">
-         <p className="text-[9px] font-black text-slate-500 uppercase tracking-[0.8em]">AUTOMASTER OS — Digitalno srce tvoje radnje v1.0</p>
+         <p className="text-[9px] font-black text-slate-500 uppercase tracking-[0.8em]">N&N Auto — Digitalno srce tvoje radnje v1.0</p>
       </footer>
     </main>
   );

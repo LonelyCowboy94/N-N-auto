@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #f8fafc;
+  --color-background: #e8eff7;
   --color-foreground: #0f172a;
   
   --color-card: #ffffff;
@@ -20,7 +20,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 .dark {
-  --color-background: #020617;
+  --color-background: #020a27;
   --color-foreground: #f8fafc;
   
   --color-card: #030712;
@@ -42,8 +42,8 @@
 }
 
 @layer utilities {
-  .perspective-2000 {
-    perspective: 2000px;
+  .perspective-1000 {
+    perspective: 1000px;
   }
   .preserve-3d {
     transform-style: preserve-3d;

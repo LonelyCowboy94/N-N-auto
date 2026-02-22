@@ -36,11 +36,11 @@ export default function DocumentsTable({ initialOrders }: { initialOrders: any[]
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Pretraži naloge..."
-          className="w-full bg-card border border-border rounded-none pl-11 pr-4 py-3 text-sm outline-none focus:border-primary transition-all"
+          className="w-full bg-card/85 border border-border rounded-none pl-11 pr-4 py-3 text-sm outline-none focus:border-primary transition-all"
         />
       </div>
 
-      <div className="border border-border bg-card overflow-hidden">
+      <div className="border border-border bg-card/50 backdrop-blur-xs overflow-hidden">
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="bg-muted/50 text-[10px] font-black uppercase tracking-widest text-muted-foreground border-b border-border">
@@ -62,7 +62,7 @@ export default function DocumentsTable({ initialOrders }: { initialOrders: any[]
               >
                 <td className="px-6 py-5">
                   <div className="flex items-center gap-3">
-                    <div className="p-2 bg-slate-900 border border-slate-800 text-blue-500">
+                    <div className="p-2 bg-background border border-slate-800 text-blue-500">
                       <FileText size={18} />
                     </div>
                     <span className="font-black text-sm tracking-tighter italic uppercase text-foreground">

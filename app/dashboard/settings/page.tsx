@@ -1,26 +1,30 @@
-// app/dashboard/settings/page.tsx
 import { db } from "@/db";
-import { shops } from "@/db/schema";
+import { shops, users } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import SettingsForm from "./SettingsForm";
+import SettingsTabs from "./SettingsTabs";
 
 export default async function SettingsPage() {
   const session = await getServerSession(authOptions);
   const shopId = (session?.user as any)?.shopId;
+  const userId = (session?.user as any)?.id;
 
-  // Povuci podatke iz baze za inicijalni value
   const [shopData] = await db.select().from(shops).where(eq(shops.id, shopId));
+  const [userData] = await db.select().from(users).where(eq(users.id, userId));
 
   return (
-    <div className="p-6 lg:p-10 max-w-4xl">
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Podešavanja radnje</h1>
-        <p className="text-slate-500 mt-1">Ovi podaci će se prikazivati u zaglavlju svakog ponude i računa.</p>
+    // Uklonjen max-w-6xl i mx-auto, dodata puna širina
+    <div className="p-6 lg:p-12 w-full space-y-8"> 
+      <header className="border-b border-border pb-6">
+        <h1 className="text-4xl font-black uppercase italic tracking-tighter text-foreground">Sistemska Podešavanja</h1>
+        <p className="text-muted-foreground text-[10px] font-bold uppercase tracking-[0.2em] mt-1 italic opacity-70">
+           Konfiguracija servisa i administracija naloga
+        </p>
       </header>
 
-      <SettingsForm initialData={shopData} />
+      {/* Tabs će sada ispuniti sav prostor desno od sidebara */}
+      <SettingsTabs shopData={shopData} userData={userData} />
     </div>
   );
 }

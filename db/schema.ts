@@ -31,6 +31,7 @@ export const shops = pgTable("shops", {
 
 export const users = pgTable("users", {
   id: uuid("id").defaultRandom().primaryKey(),
+  name: text("name"),
   email: text("email").notNull().unique(),
   password: text("password").notNull(),
   shopId: uuid("shop_id").references(() => shops.id),

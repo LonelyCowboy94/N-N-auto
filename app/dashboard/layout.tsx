@@ -5,6 +5,8 @@ import { shops } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Sidebar from "@/components/Sidebar";
+import DashboardBackground from "@/components/DashboardBackground";
+
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const session = await getServerSession(authOptions);
@@ -20,9 +22,10 @@ export default async function DashboardLayout({ children }: { children: React.Re
       defaultTheme={themeFromDb} 
       forcedTheme={themeFromDb} 
     >
-      <div className="flex min-h-screen">
+       <div className="flex min-h-screen">
         <Sidebar />
         <main className="flex-1 overflow-y-auto">
+          <DashboardBackground />
           {children}
         </main>
       </div>

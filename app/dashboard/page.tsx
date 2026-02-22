@@ -29,7 +29,7 @@ export default async function DashboardPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-         <div className="bg-card border border-border p-8 border-l-4 border-l-primary space-y-4 shadow-sm">
+         <div className="bg-card/50 backdrop-blur-xs border border-border p-8 border-l-4 border-l-primary space-y-4 shadow-sm">
             <h3 className="font-black uppercase italic text-sm tracking-widest">Brzi presek</h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
                 U tekućem mesecu ostvaren je profit od <span className="text-foreground font-bold">{stats.profit.toLocaleString()} RSD</span>. 
@@ -48,7 +48,7 @@ export default async function DashboardPage() {
 
 function KpiSmall({ label, value, icon, color, highlight, noCurrency }: any) {
   return (
-    <div className={`bg-card border border-border p-5 space-y-1 ${highlight ? 'border-primary' : ''}`}>
+    <div className={`bg-card/50 backdrop-blur-xs border border-border p-5 space-y-1 ${highlight ? 'border-primary' : ''}`}>
       <div className={`flex items-center gap-2 ${color} opacity-80`}>
         {icon}
         <span className="text-[8px] font-black uppercase tracking-widest">{label}</span>
