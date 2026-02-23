@@ -9,11 +9,24 @@ import { UTApi } from "uploadthing/server";
 
 const utapi = new UTApi();
 
+export async function getShopSettings() {
+  const session = await getServerSession(authOptions);
+  const shopId = (session?.user as any)?.shopId;
+
+  if (!shopId) return null;
+
+  const [shop] = await db
+    .select()
+    .from(shops)
+    .where(eq(shops.id, shopId));
+
+  return shop || null;
+}
+
 // 1. Čuvanje svih tekstualnih podataka
 export async function updateShopSettings(formData: FormData) {
   const session = await getServerSession(authOptions);
   const shopId = (session?.user as any)?.shopId;
-
   if (!shopId) throw new Error("Unauthorized");
 
   const data = {
@@ -25,6 +38,8 @@ export async function updateShopSettings(formData: FormData) {
     phone: formData.get("phone") as string,
     emailShop: formData.get("emailShop") as string,
     theme: formData.get("theme") as string,
+    // NOVO: Pretvaramo string iz forme u broj za bazu
+    taxRate: Number(formData.get("taxRate") || 0), 
   };
 
   try {

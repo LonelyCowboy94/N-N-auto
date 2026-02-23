@@ -58,6 +58,23 @@
 }
 
 @media print {
+  /* Forsiramo svetlu šemu boja za printer */
+  :root {
+    color-scheme: light !important;
+  }
+
+  /* Resetujemo body i pozadinu na čisto belu */
+  body {
+    background-color: white !important;
+    color: black !important;
+  }
+
+  /* Uklanjamo sve tamne pozadine koje Tailwind dodaje u dark modu */
+  .dark {
+    background-color: white !important;
+  }
+
+  /* Osiguravamo da se siva polja u tabelama vide (exact color adjust) */
   * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;

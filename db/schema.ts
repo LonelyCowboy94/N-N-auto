@@ -27,6 +27,7 @@ export const shops = pgTable("shops", {
   logoUrl: text("logo_url"),
   theme: text("theme").default("light"),
   createdAt: timestamp("created_at").defaultNow(),
+  taxRate: doublePrecision("tax_rate").default(0),
 });
 
 export const users = pgTable("users", {
@@ -118,6 +119,7 @@ export const workOrders = pgTable("work_orders", {
   dateExpected: timestamp("date_expected"),
   advisor: text("advisor"),
   note: text("note"),
+  mileage: integer("mileage"),
 
   customerId: uuid("customer_id")
     .references(() => customers.id)

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { updateShopSettings, updateShopLogo } from "@/app/actions/shop"; 
-import { Image as ImageIcon, Moon, Sun, MapPin, Loader2, CheckCircle } from "lucide-react";
+import { Image as ImageIcon, Moon, Sun, MapPin, Loader2, CheckCircle, Percent } from "lucide-react";
 import { UploadButton } from "@/lib/uploadthing";
 import { useRouter } from "next/navigation";
 
@@ -19,7 +19,7 @@ export default function SettingsForm({ initialData }: { initialData: any }) {
 
     try {
       await updateShopSettings(formData);
-      alert("Podešavanja su sačuvana!");
+      alert("Podešavanja su uspešno sačuvana!");
     } catch (err) {
       alert("Greška pri čuvanju.");
     } finally {
@@ -27,11 +27,12 @@ export default function SettingsForm({ initialData }: { initialData: any }) {
     }
   };
 
-  const InputField = ({ label, name, defaultValue, placeholder }: any) => (
+  const InputField = ({ label, name, defaultValue, placeholder, type = "text" }: any) => (
     <div className="space-y-1.5">
       <label className="text-[10px] font-black text-muted-foreground uppercase ml-1 tracking-widest italic">{label}</label>
       <input 
         name={name} 
+        type={type}
         defaultValue={defaultValue} 
         placeholder={placeholder}
         className="w-full px-4 py-2.5 bg-background border border-border rounded-none focus:border-primary outline-none transition-all text-foreground" 
@@ -48,9 +49,24 @@ export default function SettingsForm({ initialData }: { initialData: any }) {
             <div className="bg-card border border-border p-6 shadow-sm space-y-5">
                 <h3 className="font-black text-[11px] uppercase tracking-[0.2em] text-primary italic border-b border-border pb-3 mb-4">I - Osnovni podaci servisa</h3>
                 <InputField label="Naziv servisa" name="name" defaultValue={initialData.name} />
+                
                 <div className="grid grid-cols-2 gap-4">
                     <InputField label="PIB" name="pib" defaultValue={initialData.pib} />
                     <InputField label="Matični broj" name="maticniBroj" defaultValue={initialData.maticniBroj} />
+                </div>
+
+                {/* NOVO: STOPA POREZA */}
+                <div className="pt-2 border-t border-border/50">
+                    <div className="max-w-50">
+                        <InputField 
+                          label="Stopa poreza (%)" 
+                          name="taxRate" 
+                          type="number"
+                          defaultValue={initialData.taxRate || 0} 
+                          placeholder="0"
+                        />
+                        <p className="text-[9px] text-muted-foreground mt-1 italic">Upišite 20 ako ste u PDV-u, ili 0 ako niste.</p>
+                    </div>
                 </div>
             </div>
 
@@ -65,7 +81,7 @@ export default function SettingsForm({ initialData }: { initialData: any }) {
             </div>
         </div>
 
-        {/* KOLONA 2: LOGO I TEMA */}
+        {/* KOLONA 2: LOGO I TEMA (OSTALO OSTAJE ISTO) */}
         <div className="space-y-6">
             <div className="bg-card border border-border p-6 shadow-sm">
                 <h3 className="font-black text-[11px] uppercase tracking-[0.2em] text-primary italic border-b border-border pb-3 mb-4">III - Vizuelni identitet (Logo)</h3>
@@ -85,7 +101,7 @@ export default function SettingsForm({ initialData }: { initialData: any }) {
                         onClientUploadComplete={async (res) => {
                             if (res?.[0]) {
                                 await updateShopLogo(res[0].url);
-                                router.refresh(); // Osvežava podatke u initialData
+                                router.refresh();
                                 alert("Logo uspešno učitan!");
                             }
                         }}

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { FileText, Trash2, Search, Filter, Loader2 } from "lucide-react";
+import { FileText, Trash2, Search, Edit2, Loader2 } from "lucide-react";
 import { deleteWorkOrder } from "@/app/actions/work-orders";
 
 export default function DocumentsTable({ initialOrders }: { initialOrders: any[] }) {
@@ -17,8 +17,7 @@ export default function DocumentsTable({ initialOrders }: { initialOrders: any[]
   );
 
   const handleDelete = async (e: React.MouseEvent, id: string, number: string) => {
-    e.stopPropagation(); // SPREČAVA OTVARANJE NALOGA PRI KLIKU NA KANTICU
-    
+    e.stopPropagation(); // Stopira router.push ka pregledu
     if (confirm(`Da li ste sigurni da želite da OBRIŠETE radni nalog br. ${number}?`)) {
       setDeletingId(id);
       const res = await deleteWorkOrder(id);
@@ -27,16 +26,22 @@ export default function DocumentsTable({ initialOrders }: { initialOrders: any[]
     }
   };
 
+  const handleEdit = (e: React.MouseEvent, id: string) => {
+    e.stopPropagation(); // Stopira router.push ka pregledu
+    // Vodi nas na stranicu za izmenu
+    router.push(`/dashboard/documents/${id}/edit`);
+  };
+
   return (
     <div className="space-y-6">
-      {/* Search */}
+      {/* Search Bar */}
       <div className="relative max-w-xl group">
         <Search className="absolute left-3 top-3.5 text-muted-foreground group-focus-within:text-primary transition-colors" size={18} />
         <input 
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Pretraži naloge..."
-          className="w-full bg-card/85 border border-border rounded-none pl-11 pr-4 py-3 text-sm outline-none focus:border-primary transition-all"
+          placeholder="Pretraži po broju, imenu ili tablicama..."
+          className="w-full bg-card/85 border border-border rounded-none pl-11 pr-4 py-3 text-sm outline-none focus:border-primary transition-all text-foreground"
         />
       </div>
 
@@ -50,7 +55,7 @@ export default function DocumentsTable({ initialOrders }: { initialOrders: any[]
               <th className="px-6 py-4">Datum</th>
               <th className="px-6 py-4 text-right">Iznos</th>
               <th className="px-6 py-4 text-center">Status</th>
-              <th className="px-6 py-4 text-right">Akcije</th>
+              <th className="px-6 py-4 text-right">Upravljanje</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
@@ -93,13 +98,26 @@ export default function DocumentsTable({ initialOrders }: { initialOrders: any[]
                   </span>
                 </td>
                 <td className="px-6 py-5 text-right">
-                  <button 
-                    onClick={(e) => handleDelete(e, order.id, order.number)}
-                    disabled={deletingId === order.id}
-                    className="p-2.5 bg-background border border-border text-muted-foreground hover:bg-red-600 hover:text-white hover:border-red-600 transition-all active:scale-90"
-                  >
-                    {deletingId === order.id ? <Loader2 className="animate-spin" size={16} /> : <Trash2 size={16} />}
-                  </button>
+                  <div className="flex justify-end gap-2">
+                    {/* DUGME ZA EDIT */}
+                    <button 
+                      onClick={(e) => handleEdit(e, order.id)}
+                      className="p-2.5 bg-background border border-border text-muted-foreground hover:bg-primary hover:text-white hover:border-primary transition-all active:scale-90"
+                      title="Izmeni nalog"
+                    >
+                      <Edit2 size={16} />
+                    </button>
+
+                    {/* DUGME ZA BRISANJE */}
+                    <button 
+                      onClick={(e) => handleDelete(e, order.id, order.number)}
+                      disabled={deletingId === order.id}
+                      className="p-2.5 bg-background border border-border text-muted-foreground hover:bg-red-600 hover:text-white hover:border-red-600 transition-all active:scale-90 disabled:opacity-50"
+                      title="Obriši nalog"
+                    >
+                      {deletingId === order.id ? <Loader2 className="animate-spin" size={16} /> : <Trash2 size={16} />}
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
@@ -108,7 +126,7 @@ export default function DocumentsTable({ initialOrders }: { initialOrders: any[]
 
         {filtered.length === 0 && (
           <div className="p-20 text-center text-muted-foreground italic text-sm">
-            Nije pronađen nijedan dokument.
+            Nema pronađenih dokumenata u bazi.
           </div>
         )}
       </div>
