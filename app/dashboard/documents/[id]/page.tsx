@@ -79,8 +79,8 @@ export default async function OrderDetailsPage(props: { params: Promise<{ id: st
         {/* 3. STAVKE */}
         <div className="space-y-4 mb-5">
             <div className="border mb-3 border-black">
-                <div className="bg-slate-300 text-black border-b p-1 text-[9px] font-black uppercase tracking-widest">I - Materijal / ugrađeni delovi</div>
-                <table className="w-full text-[10px] border-collapse">
+                <div className="bg-slate-300 text-black border-b p-1 text-[10px] font-black uppercase tracking-widest">I - Materijal / ugrađeni delovi</div>
+                <table className="w-full text-[12px] border-collapse">
                     <thead>
                         <tr className="bg-slate-100 border-b border-black text-left">
                             <th className="p-2 border-r border-black w-10 text-center">RB</th>
@@ -105,8 +105,8 @@ export default async function OrderDetailsPage(props: { params: Promise<{ id: st
             </div>
 
             <div className="border border-black">
-                <div className="bg-slate-300 text-black border-b p-1 text-[9px] font-black uppercase tracking-widest">II - Opis izvršenih radova / Usluge</div>
-                <table className="w-full text-[10px] border-collapse">
+                <div className="bg-slate-300 text-black border-b p-1 text-[10px] font-black uppercase tracking-widest">II - Opis izvršenih radova / Usluge</div>
+                <table className="w-full text-[12px] border-collapse">
                   <thead>
                         <tr className="bg-slate-100 border-b border-black text-left">
                             <th className="p-2 border-r border-black w-10 text-center">RB</th>

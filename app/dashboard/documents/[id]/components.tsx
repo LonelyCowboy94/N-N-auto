@@ -10,7 +10,7 @@ export const ShopHeader = ({ shop }: { shop: any }) => (
     </div>
     <div className="w-3/4 text-right mr-5 mt-1">
       <h1 className="text-xl font-black uppercase leading-none mb-2 tracking-tighter">{shop.name}</h1>
-      <div className="text-[10px] space-y-0.5 font-medium text-slate-800 print:text-black">
+      <div className="text-[12px] space-y-0.5 font-medium text-slate-800 print:text-black">
         <p>{shop.address}, {shop.city}</p>
         <p>Tel: {shop.phone || '---'}</p>
         <p>{shop.emailShop || '---'}</p>
@@ -26,14 +26,14 @@ export const ShopHeader = ({ shop }: { shop: any }) => (
 export const CustomerAndNote = ({ customer, note }: { customer: any, note: string | null }) => (
   <div className="grid grid-cols-2 border border-black mb-3 divide-x divide-black">
     <div className="p-5 space-y-1">
-      <p className="text-[8px] font-black uppercase text-slate-400 mb-1 tracking-widest print:text-slate-600">Vlasnik / Naručilac radova</p>
-      <p className="text-lg font-black uppercase leading-none">{customer.name}</p>
-      <p className="text-[11px] text-slate-700 print:text-black">{customer.address}</p>
-      <p className="text-[11px] font-bold pt-2">Kontakt: {customer.phone}</p>
+      <p className="text-[10px] font-bold uppercase text-slate-400 mb-1 tracking-widest print:text-slate-600">Vlasnik / Naručilac radova</p>
+      <p className="text-lg font-bold leading-none">{customer.name}</p>
+      <p className="text-[12px] text-slate-700 print:text-black">{customer.address}</p>
+      <p className="text-[12px] font-bold pt-2">Kontakt: {customer.phone}</p>
     </div>
     <div className="p-5 bg-slate-50/30">
-      <p className="text-[8px] font-black uppercase text-slate-400 mb-1 tracking-widest print:text-slate-600">Napomena / Opis kvara</p>
-      <p className="text-[11px] leading-relaxed italic text-slate-800 print:text-black whitespace-pre-wrap">
+      <p className="text-[10px] font-bold uppercase text-slate-400 mb-1 tracking-widest print:text-slate-600">Napomena / Opis kvara</p>
+      <p className="text-[12px] leading-relaxed italic text-slate-800 print:text-black whitespace-pre-wrap">
         {note || "Nema dodatnih napomena."}
       </p>
     </div>
@@ -56,15 +56,15 @@ export const VehicleTable = ({ vehicle, order }: { vehicle: any, order: any }) =
       </thead>
       <tbody>
         <tr>
-          <td className="p-2 border-r font-bold border-black uppercase text-xs">{vehicle.make} {vehicle.model}</td>
-          <td className="p-2 border-r italic font-mono border-black uppercase underline text-center text-xs">{vehicle.plateNumber}</td>
-          <td className="p-2 border-r border-black text-center text-xs">{vehicle.year || '---'}</td>
-          <td className="p-2 border-r border-black text-center text-xs font-mono">
+          <td className="p-2 border-r font-bold border-black uppercase text-[12px]">{vehicle.make} {vehicle.model}</td>
+          <td className="p-2 border-r italic font-mono border-black uppercase underline text-center text-[12px]">{vehicle.plateNumber}</td>
+          <td className="p-2 border-r border-black text-center text-[12px]">{vehicle.year || '---'}</td>
+          <td className="p-2 border-r border-black text-center text-[12px] font-mono">
   {order.mileage 
     ? order.mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") 
     : '---'}
 </td>
-          <td className="p-2 font-mono text-[10px] tracking-tighter">
+          <td className="p-2 font-mono text-[12px] tracking-tighter">
             {vehicle.vin} | {vehicle.displacement}ccm | {vehicle.power}
           </td>
         </tr>
