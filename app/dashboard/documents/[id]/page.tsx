@@ -54,20 +54,20 @@ export default async function OrderDetailsPage(props: { params: Promise<{ id: st
       </div>
 
       {/* A4 FORMAT */}
-      <div className="max-w-[210mm] min-h-[297mm] mx-auto bg-white text-black p-[15mm] shadow-2xl print:shadow-none print:p-0 print:m-0 flex flex-col font-sans border border-slate-200 print:border-none relative">
+      <div className="max-w-[210mm] min-h-[297mm] mx-auto bg-white text-black px-2 shadow-2xl print:shadow-none print:p-0 print:m-0 flex flex-col font-sans border border-slate-200 print:border-none relative">
         
         <ShopHeader shop={shop} />
 
-        <div className="text-center mb-10">
+        <div className="text-center mb-6">
             <h2 className="text-3xl font-bold uppercase tracking-tighter italic">Radni Nalog br. {order.number}</h2>
             <p className="text-[10px] uppercase font-black mt-1 tracking-[0.4em] text-slate-500 print:text-black">tehnička dokumentacija servisa</p>
         </div>
 
-        <div className="grid grid-cols-4 border border-black text-[10px] mb-6 divide-x divide-black bg-slate-100/50">
-            <div className="p-2"><p className="text-slate-500 font-bold mb-1 uppercase text-[7px]">Broj naloga</p><p className="font-bold text-sm">{order.number}</p></div>
-            <div className="p-2"><p className="text-slate-500 font-bold mb-1 uppercase text-[7px]">Datum prijema</p><p className="font-bold text-sm">{order.dateEntry?.toLocaleDateString('sr-RS')}</p></div>
-            <div className="p-2"><p className="text-slate-500 font-bold mb-1 uppercase text-[7px]">Status</p><p className="font-black uppercase text-blue-600 text-sm">{order.status}</p></div>
-            <div className="p-2"><p className="text-slate-500 font-bold mb-1 uppercase text-[7px]">Administrator</p><p className="font-bold text-sm">Sistem</p></div>
+        <div className="grid grid-cols-4 border border-black text-[10px] mb-2 divide-x divide-black bg-slate-100/50">
+            <div className="p-2"><p className="text-slate-500 font-bold uppercase text-[7px]">Broj naloga</p><p className="font-bold text-sm">{order.number}</p></div>
+            <div className="p-2"><p className="text-slate-500 font-bold uppercase text-[7px]">Datum prijema</p><p className="font-bold text-sm">{order.dateEntry?.toLocaleDateString('sr-RS')}</p></div>
+            <div className="p-2"><p className="text-slate-500 font-bold uppercase text-[7px]">Status</p><p className="font-black uppercase text-blue-600 text-sm">{order.status}</p></div>
+            <div className="p-2"><p className="text-slate-500 font-bold uppercase text-[7px]">Administrator</p><p className="font-bold text-sm">Sistem</p></div>
         </div>
 
         {/* 1. VLASNIK I NAPOMENA */}
@@ -77,9 +77,9 @@ export default async function OrderDetailsPage(props: { params: Promise<{ id: st
         <VehicleTable vehicle={vehicle} order={order} />
 
         {/* 3. STAVKE */}
-        <div className="space-y-6 mb-10">
-            <div className="border border-black">
-                <div className="bg-slate-800/30 text-black border-b p-2 text-[9px] font-black uppercase tracking-widest">I - Materijal i ugrađeni delovi</div>
+        <div className="space-y-4 mb-5">
+            <div className="border mb-3 border-black">
+                <div className="bg-slate-300 text-black border-b p-1 text-[9px] font-black uppercase tracking-widest">I - Materijal / ugrađeni delovi</div>
                 <table className="w-full text-[10px] border-collapse">
                     <thead>
                         <tr className="bg-slate-100 border-b border-black text-left">
@@ -105,8 +105,17 @@ export default async function OrderDetailsPage(props: { params: Promise<{ id: st
             </div>
 
             <div className="border border-black">
-                <div className="bg-slate-800/30 text-black border-b p-2 text-[9px] font-black uppercase tracking-widest">II - Opis izvršenih radova / Usluge</div>
+                <div className="bg-slate-300 text-black border-b p-1 text-[9px] font-black uppercase tracking-widest">II - Opis izvršenih radova / Usluge</div>
                 <table className="w-full text-[10px] border-collapse">
+                  <thead>
+                        <tr className="bg-slate-100 border-b border-black text-left">
+                            <th className="p-2 border-r border-black w-10 text-center">RB</th>
+                            <th className="p-2 border-r border-black">Opis rada</th>
+                            <th className="p-2 border-r border-black w-14 text-center">Kol.</th>
+                            <th className="p-2 border-r border-black w-28 text-right">Cena</th>
+                            <th className="p-2 w-32 text-right">Vrednost</th>
+                        </tr>
+                    </thead>
                     <tbody className="divide-y divide-black">
                         {services.map((item, idx) => (
                             <tr key={item.id}>
@@ -140,8 +149,8 @@ export default async function OrderDetailsPage(props: { params: Promise<{ id: st
                 
                 {/* DINAMIČKI POREZ */}
                 <div className="w-[65mm] space-y-1 bg-slate-100/50 p-4 border border-black shadow-none">
-                  <div className="flex justify-between text-[9px] font-bold uppercase text-slate-500">
-                    <span>OSNOVICA (NETO):</span>
+                  <div className="flex justify-between text-[12px] font-mono uppercase text-slate-500">
+                    <span>OSNOVICA:</span>
                     <span className="text-black font-mono">{netAmount.toLocaleString('sr-RS', { minimumFractionDigits: 2 })}</span>
                   </div>
                   
@@ -153,11 +162,11 @@ export default async function OrderDetailsPage(props: { params: Promise<{ id: st
                   )}
 
                   <div className="flex justify-between items-center pt-2">
-                    <span className="text-[10px] font-black uppercase italic tracking-tighter">
+                    <span className="text-[12px] font-mono uppercase tracking-tighter">
                         {taxRate > 0 ? "UKUPNO:" : "ZA NAPLATU:"}
                     </span>
-                    <p className="text-[24px] font-mono tracking-tighter leading-none">
-                        {grossAmount.toLocaleString('sr-RS', { minimumFractionDigits: 2 })}<small className="text-[9px] not-italic ml-1 font-bold">RSD</small>
+                    <p className="text-[18px] font-mono tracking-tighter leading-none">
+                        {grossAmount.toLocaleString('sr-RS', { minimumFractionDigits: 2 })}<span className="text-[10px] not-italic ml-1 font-bold">RSD</span>
                     </p>
                   </div>
                 </div>
