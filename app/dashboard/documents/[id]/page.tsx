@@ -383,7 +383,7 @@ export default async function OrderDetailsPage(props: {
                 </span>
               </div>
               <div className="flex justify-between text-[9px] font-bold uppercase text-slate-500 print:text-black border-b border-slate-300 pb-1">
-                <span>PDV (20%):</span>
+                <span>Neto:</span>
                 <span className="text-black font-mono">
                   {vatAmount.toLocaleString("sr-RS", {
                     minimumFractionDigits: 2,
@@ -396,7 +396,7 @@ export default async function OrderDetailsPage(props: {
                 </span>
                 <div className="text-right">
                   <p className="text-2xl font-mono tracking-tighter leading-none">
-                    {grossAmount.toLocaleString("sr-RS", {
+                    {netAmount.toLocaleString("sr-RS", {
                       minimumFractionDigits: 2,
                     })}
                     <span className="text-[9px] not-italic ml-1 font-bold">
